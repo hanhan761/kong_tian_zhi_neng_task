@@ -1,0 +1,35 @@
+# 课程运行环境 CPU 锁（实测导出，不是全新机器重装证明）
+# Python 3.11.18 / Windows-10-10.0.22000 / torch 2.8.0+cpu / torchvision 0.23.0+cpu
+# pip freeze 的发行版本显示 torch==2.8.0、torchvision==0.23.0；实际导入为 2.8.0+cpu、0.23.0+cpu，local build 未被抹去。
+# 安装 torch CPU wheel：pip install --index-url https://download.pytorch.org/whl/cpu torch==2.8.0+cpu torchvision==0.23.0+cpu
+# 其余依赖使用普通 PyPI；不要把全部依赖都指向 torch 索引。
+
+# pip freeze（已移除不可移植的本地路径/可编辑依赖）
+cloudpickle==3.1.2
+contourpy==1.3.3
+cycler==0.12.1
+Farama-Notifications==0.0.6
+filelock==4.2.6
+fonttools==4.68.0
+fsspec==2026.9.0
+gymnasium==1.0.0
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+Jinja2==3.1.6
+kiwisolver==1.5.1
+MarkupSafe==3.0.4
+matplotlib==3.10.5
+mpmath==1.3.0
+networkx==3.6.1
+numpy==2.3.2
+packaging==26.3
+pillow==13.0.0
+pyparsing==3.3.3
+python-dateutil==4.0.0
+sympy==1.14.0
+torch==2.8.0
+torchvision==0.23.0
+typing_extensions==4.16.0
+tzdata==2026.6
+
+# 被移除的原始行（仅证据，不可直接安装）

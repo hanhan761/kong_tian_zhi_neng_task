@@ -1,0 +1,7 @@
+# 100-image custom subset curated from COCO 2017 val for the course extension.
+path: custom_coco_balanced
+train: images/train
+val: images/val
+test:
+nc: 5
+names: ['person', 'car', 'bus', 'bird', 'dog']

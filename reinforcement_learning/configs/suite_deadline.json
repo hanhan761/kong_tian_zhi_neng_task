@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "template_only": true,
+  "profile": "deadline",
+  "total_hours_if_no_explicit_deadline": 120,
+  "reserve_delivery_hours": 24,
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "initial_required_seeds": [
+    0
+  ],
+  "formal_budget_levels": [
+    4000000,
+    2000000,
+    1000000
+  ],
+  "screen_steps": 300000,
+  "max_combo_screen_runs": 1,
+  "automatic_continue_after_acceptance": true,
+  "gpu_concurrent_training_limit": 1,
+  "smoke_steps_each": 30000,
+  "optional_sac_ppo_enabled": false,
+  "resume": true,
+  "runs": [
+    {
+      "id": "ddpg_baseline",
+      "config": "ddpg_baseline.json",
+      "depends_on": [
+        "P2"
+      ]
+    },
+    {
+      "id": "screens",
+      "configs": [
+        "T1_actor_lr.json",
+        "T2_noise_005.json",
+        "T3_noise_010.json",
+        "T4_gamma_099.json",
+        "T5_tau_001.json",
+        "T6_batch_128.json"
+      ],
+      "depends_on": [
+        "ddpg_baseline"
+      ]
+    },
+    {
+      "id": "tuned_ddpg",
+      "generated_config": "generated/tuned_ddpg.json",
+      "selection_file": "outputs/selections/tuning_selection.json",
+      "depends_on": [
+        "screens"
+      ]
+    },
+    {
+      "id": "td3_matched",
+      "config": "td3_matched.json",
+      "depends_on": [
+        "P2"
+      ]
+    },
+    {
+      "id": "td3_practical",
+      "config": "td3_practical.json",
+      "depends_on": [
+        "P2"
+      ]
+    },
+    {
+      "id": "battle_W0",
+      "config": "battle_W0.json",
+      "depends_on": [
+        "tuned_ddpg",
+        "td3_practical",
+        "battle_reachability_pass"
+      ]
+    },
+    {
+      "id": "battle_W1",
+      "config": "battle_W1.json",
+      "depends_on": [
+        "tuned_ddpg",
+        "td3_practical",
+        "battle_reachability_pass"
+      ]
+    }
+  ],
+  "execution_order": [
+    "ddpg_baseline",
+    "screens",
+    "tuned_ddpg",
+    "td3_matched",
+    "td3_practical",
+    "battle_W0",
+    "battle_W1"
+  ],
+  "completion_requires": [
+    "course_requirement_traceability",
+    "fixed_seed_evaluation",
+    "valid_models_and_videos",
+    "battle_final_paths",
+    "report",
+    "strict_delivery_validation"
+  ],
+  "task_06_machine_budget_hours": 48,
+  "budget_default_note": "The user has five days for four experiments; 48 machine hours for 06 is a conservative engineering default, not a verified user allocation."
+}

@@ -1,0 +1,31 @@
+# Combined attempt: retain 640 input and anchors, emphasize small-object boxes
+# and enable image-weighted sampling through the launcher CLI.
+lr0: 0.0007
+lrf: 0.10
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 1.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.0007
+box: 0.07
+cls: 0.5
+cls_pw: 1.0
+obj: 1.0
+obj_pw: 1.0
+iou_t: 0.20
+anchor_t: 4.0
+fl_gamma: 0.0
+hsv_h: 0.01
+hsv_s: 0.3
+hsv_v: 0.20
+degrees: 0.0
+translate: 0.03
+scale: 0.15
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 0.0
+mixup: 0.0
+copy_paste: 0.0
+nwd_ratio: 0.10
